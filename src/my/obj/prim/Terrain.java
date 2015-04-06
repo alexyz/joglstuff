@@ -3,8 +3,8 @@ package my.obj.prim;
 import java.awt.image.*;
 import java.nio.*;
 import java.util.Arrays;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 import javax.swing.*;
 
 import com.jogamp.common.nio.Buffers;

@@ -1,6 +1,6 @@
 package my.obj.op;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 import my.obj.MyObject;
 

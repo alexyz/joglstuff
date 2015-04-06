@@ -1,6 +1,6 @@
 package my;
 
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.Timer;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;

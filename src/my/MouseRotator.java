@@ -3,8 +3,8 @@ package my;
 import java.awt.Dimension;
 import java.awt.event.*;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.awt.GLCanvas;
 
 import my.obj.MyObject;
 

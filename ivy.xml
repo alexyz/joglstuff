@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="" module="joglstuff" status="integration" />
+	<dependencies>
+		<!-- need to explicitly list platform dependencies... -->
+		<!-- also make sure to include [classifier] in the retrive pattern -->
+		<dependency org="org.jogamp.jogl" name="jogl-all" rev="2.3.1">
+			<artifact name="jogl-all"/>
+            <artifact name="jogl-all" e:classifier="sources"/>
+			<artifact name="jogl-all" e:classifier="natives-windows-amd64" />
+		</dependency>
+		<dependency org="org.jogamp.gluegen" name="gluegen-rt" rev="2.3.1" >
+			<artifact name="gluegen-rt"/>
+            <artifact name="gluegen-rt" e:classifier="sources"/>
+			<artifact name="gluegen-rt" e:classifier="natives-windows-amd64" />
+		</dependency>
+	</dependencies>
+</ivy-module>

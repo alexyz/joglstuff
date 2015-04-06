@@ -1,3 +1,0 @@
-place gluegen-rt and jogl-all in here
-
-place required native jars in here as well (don't need to be on classpath)

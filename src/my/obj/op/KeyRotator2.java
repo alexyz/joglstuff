@@ -2,7 +2,7 @@ package my.obj.op;
 
 import java.awt.event.*;
 import java.util.regex.*;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 
 
 public class KeyRotator2 extends Rotator {

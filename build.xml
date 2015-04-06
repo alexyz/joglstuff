@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="jar" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<ivy:configure />
+	<ivy:resolve />
+	<ivy:retrieve type="jar" sync="true" />
+
+	<target name="jar">
+		<jar destfile="dist/joglstuff.jar">
+			<manifest>
+				<attribute name="Main-Class" value="my.Main" />
+			</manifest>
+			<fileset dir="bin" />
+			<zipgroupfileset dir="lib" includes="**/*.jar" excludes="*-javadoc.jar,*-sources.jar" />
+		</jar>
+	</target>
+
+	<target name="deploy" depends="jar">
+		<copy file="dist/joglstuff.jar" tofile="${user.home}/Dropbox/Public/joglstuff.jar" />
+	</target>
+
+</project>

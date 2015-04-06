@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 
 
 // TODO keytrans+rotate, e.g. keyRotator("x=ad") keyTranslator("z=ws y=qe", 0.25f)

@@ -1,6 +1,6 @@
 package my.obj.op;
 
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 
 import my.Main;
 
