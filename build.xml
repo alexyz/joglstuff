@@ -11,7 +11,7 @@
 				<attribute name="Main-Class" value="my.Main" />
 			</manifest>
 			<fileset dir="bin" />
-			<zipgroupfileset dir="lib" includes="**/*.jar" excludes="*-javadoc.jar,*-sources.jar" />
+			<zipgroupfileset dir="lib" includes="**/*.jar" excludes="**/*-javadoc.jar,**/*-sources.jar" />
 		</jar>
 	</target>
 

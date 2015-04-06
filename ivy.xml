@@ -3,7 +3,6 @@
 	<info organisation="" module="joglstuff" status="integration" />
 	<dependencies>
 		<!-- need to explicitly list platform dependencies... -->
-		<!-- also make sure to include [classifier] in the retrive pattern -->
 		<dependency org="org.jogamp.jogl" name="jogl-all" rev="2.3.1">
 			<artifact name="jogl-all"/>
             <artifact name="jogl-all" e:classifier="sources"/>
