@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="jar" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project default="jar">
 
-	<ivy:configure />
-	<ivy:resolve />
-	<ivy:retrieve type="jar" sync="true" />
+	<property name="jarfile" value="joglstuff.jar" />
 
 	<target name="jar">
-		<jar destfile="dist/joglstuff.jar">
+		<jar destfile="dist/${jarfile}">
 			<manifest>
 				<attribute name="Main-Class" value="my.Main" />
 			</manifest>
 			<fileset dir="bin" />
-			<zipgroupfileset dir="lib" includes="**/*.jar" excludes="**/*-javadoc.jar,**/*-sources.jar" />
+			<!-- run mvn dependency:copy-dependencies first... -->
+			<!-- need to explicitly list platform classifers though... -->
+			<zipgroupfileset dir="target/dependency" includes="**/*.jar" />
 		</jar>
 	</target>
 
 	<target name="deploy" depends="jar">
-		<copy file="dist/joglstuff.jar" tofile="${user.home}/Dropbox/Public/joglstuff.jar" />
+		<copy file="dist/${jarfile}" tofile="${user.home}/Dropbox/Public/${jarfile}" />
 	</target>
 
 </project>
