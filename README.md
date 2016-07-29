@@ -10,3 +10,8 @@ Screenshots
 -----------
 
 ![Screenshot](https://dl.dropboxusercontent.com/u/8069847/jogl.png)
+
+Download
+--------
+
+[Runnable jar file](https://dl.dropboxusercontent.com/u/8069847/joglstuff.jar)

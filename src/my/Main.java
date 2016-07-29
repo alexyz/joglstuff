@@ -34,7 +34,7 @@ public class Main {
 			}
 		});
 
-		Frame frame = new Frame("Main");
+		Frame frame = new Frame("Main [https://github.com/alexyz/joglstuff]");
 		frame.add(canvas);
 		frame.setSize(640, 480);
 		frame.addWindowListener(new WindowAdapter() {
