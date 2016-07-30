@@ -21,8 +21,10 @@ import my.obj.MyObjectList;
  */
 public class MainRenderer implements GLEventListener {
 
+	public static final float ms = 1000, us = 1000_000, ns = 1000_000_000;
     private static final GLU glu = new GLU();
     private final MyObjectList root;
+    private long startTimeNano;
     
     public MainRenderer() {
         MyFactory f = new MyFactory();
@@ -35,8 +37,8 @@ public class MainRenderer implements GLEventListener {
         // add to root with camera rotate/translate
         root = f.list(
                 f.trans(0,-1,-5),
-                f.keyTranslator(0.25f, "y=eq z=ws"), // need to call gluLookAt really
-                f.keyRotator(2, "y=da"),
+                f.keyTranslator(0.25f, null, "eq", "ws"), // need to call gluLookAt really
+                f.keyRotator(2, null, "da", null),
                 f.mouseRotator(),
                 //f.timeRotator(1, "y"),
                 all);
@@ -50,7 +52,15 @@ public class MainRenderer implements GLEventListener {
     @Override
 	public void display(GLAutoDrawable glad) {
     	//System.out.println("renderer display");
-        root.update();
+    	long nt = System.nanoTime();
+    	float t;
+    	if (startTimeNano == 0) {
+    		startTimeNano = nt;
+    		t = 0;
+    	} else {
+    		t = (nt - startTimeNano) / ns;
+    	}
+        root.update(t);
         
         final GL2 gl = glad.getGL().getGL2();
         // clear buffers to preset values

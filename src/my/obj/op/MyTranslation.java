@@ -1,31 +1,18 @@
 package my.obj.op;
 
+import javax.xml.bind.annotation.*;
+
 import com.jogamp.opengl.GL2;
 
-import my.obj.MyObject;
+import my.obj.*;
 
-/**
- * A translation.
- */
-public class MyTranslation extends MyObject {
-    protected float x, y, z;
-    /**
-     * Create a translation.
-     */
-    public MyTranslation() {
-        //
-    }
-    /**
-     * Update the translation.
-     */
-    public MyTranslation translate(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        return this;
-    }
+@XmlRootElement(name="translation")
+public class MyTranslation extends MyVector {
+	
+	protected float xo, yo, zo;
+    
     @Override
 	public void display(GL2 gl) {
-        gl.glTranslatef(x, y, z);
+        gl.glTranslatef(x + xo, y + yo, z + zo);
     }
 }

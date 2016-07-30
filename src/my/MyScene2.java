@@ -22,7 +22,7 @@ class MyScene2 {
         
         MyObjectList cube = f.list(f.trans(-0.1f,0,-0.1f), f.scale(0.1f,1f,0.1f), f.cube());
         
-        MyObjectList r = f.list(f.timeRotator(2, "y"), f.set(cube, f.list(f.scale(2), f.set(terr))));
+        MyObjectList r = f.list(f.timeRotator(2, 'y'), f.set(cube, f.list(f.scale(2), f.set(terr))));
                         
         return r;
 

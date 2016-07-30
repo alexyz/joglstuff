@@ -26,18 +26,18 @@ class MyScene1 extends MyObjectList {
 
             f.list(
                     f.trans(0,1,0),
-                    f.timeRotator(15, "y"),
+                    f.timeRotator(15, 'y'),
                     f.list(
                             f.scale(0.5f),
                             f.cube()),
                             f.list(
                                     f.trans(0,0.15f,-1),
-                                    f.timeRotator(30, "z"),
+                                    f.timeRotator(30, 'z'),
                                     f.scale(0.2f),
                                     f.cube())),
             f.list(
                     f.trans(0,0,1),
-                    f.keyRotator(2f, "x=zx y=cv z=bn"),
+                    f.keyRotator(2f, "zx", "cv", "bn"),
                     f.scale(2),
                     f.checker(6,6)));
                     //f.terrain()));

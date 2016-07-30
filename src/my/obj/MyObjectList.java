@@ -1,7 +1,8 @@
 package my.obj;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import javax.xml.bind.annotation.*;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
@@ -10,25 +11,17 @@ import com.jogamp.opengl.awt.GLCanvas;
 /**
  * A list of objects to display.
  */
+@XmlRootElement(name="list")
 public class MyObjectList extends MyObject {
-	protected final MyObject[] list;
-	private final MyObject[] animated;
-
-	public MyObjectList(MyObject... list) {
-		this.list = list;
-		ArrayList<MyObject> a = new ArrayList<MyObject>();
-		getAnimated(a);
-		this.animated = a.toArray(new MyObject[a.size()]);
-	}
-
-	public MyObjectList(List<MyObject> list) {
-		this(list.toArray(new MyObjectList[list.size()]));
-	}
 	
+	@XmlMixed
+	public final List<MyObject> list = new ArrayList<>();
+
 	@Override
 	public void init(GLAutoDrawable glad) {
-		for (MyObject o : list)
+		for (MyObject o : list) {
 			o.init(glad);
+		}
 	}
 
 	/**
@@ -42,31 +35,18 @@ public class MyObjectList extends MyObject {
 		gl.glPopMatrix();
 	}
 
-	private void getAnimated(List<MyObject> a) {
+	@Override
+	public void addListeners(GLCanvas glc) {
 		for (MyObject o : list) {
-			if (o.isUpdatable())
-				a.add(o);
-			if (o instanceof MyObjectList)
-				((MyObjectList) o).getAnimated(a);
+			o.addListeners(glc);
 		}
 	}
 
 	@Override
-	public void addListeners(GLCanvas glc) {
-		for (MyObject o : list)
-			o.addListeners(glc);
-	}
-
-	/**
-	 * Update animated objects. Note that the list itself is not updatable.
-	 */
-	public void update() {
-		if (animated.length > 0) {
-			long t = System.nanoTime();
-			for (MyObject a : animated) {
-				//System.out.println("update " + a + " at " + t);
-				a.update(t);
-			}
+	public void update (float t) {
+		for (MyObject a : list) {
+			a.update(t);
 		}
 	}
+
 }

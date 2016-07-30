@@ -9,40 +9,22 @@ import com.jogamp.opengl.awt.GLCanvas;
  */
 public abstract class MyObject {
 
-	public static final float ms = 1000, us = 1000000, ns = 1000000000;
+	public static char key(String k, int n) {
+    	return k != null && k.length() > n ? k.charAt(n) : 0;
+    }
 
 	public abstract void display(GL2 gl);
 	
-	/**
-	 * Compile the object (if required)
-	 */
 	public void init(GLAutoDrawable glad) {
 		//
 	}
 	
-	/**
-	 * Set up any objects that have mouse or keyboard listeners.
-	 */
 	public void addListeners(GLCanvas glc) {
 		//
 	}
-	/**
-	 * Set the time.
-	 */
-	public void update(long t) {
-		throw new RuntimeException();
+	
+	public void update(float t) {
+		//
 	}
-	/**
-	 * Returns true if this object requires the time.
-	 */
-	public boolean isUpdatable() {
-		return false;
-	}
+	
 }
-
-
-
-
-
-
-

@@ -1,12 +1,21 @@
 package my.obj.prim;
 
+import javax.xml.bind.annotation.*;
+
 import com.jogamp.opengl.GL2;
 
-
+@XmlRootElement(name="mycheckerboard")
 public class MyCheckerBoard extends MyPrimitive {
-    private final float[][][] qa;
-    public MyCheckerBoard(int sx, int sz) {
-        // vertices (shared)
+	
+	@XmlAttribute
+	public int sx;
+	
+	@XmlAttribute
+	public int sz;
+	
+	@Override
+	protected void displayOnce(GL2 gl) {
+    	// vertices (shared)
         float[][][] v = new float[sx + 1][sz + 1][3];
         for (int n = 0; n <= sx; n++) {
             for (int m = 0; m <= sz; m++) {
@@ -29,12 +38,7 @@ public class MyCheckerBoard extends MyPrimitive {
                 q[i][4] = ((n & 1) ^ (m & 1)) == 1 ? lightgrey : darkgrey;
             }
         }
-        
-        qa = q;
+        displayQuads(gl, q);
     }
-    
-    @Override
-	protected void displayOnce(GL2 gl) {
-        displayQuads(gl, qa);
-    }
+	
 }

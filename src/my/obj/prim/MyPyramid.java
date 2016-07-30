@@ -1,12 +1,15 @@
 package my.obj.prim;
 
-import com.jogamp.opengl.GL2;
+import javax.xml.bind.annotation.*;
 
+import com.jogamp.opengl.GL2;
 
 /**
  * Tetrahedron (inaccurate)
  */
+@XmlRootElement(name="mypyramid")
 public class MyPyramid extends MyPrimitive {
+	
     /** top */
     private static final float[] A = { 0, 1, 0 };
     /** left bottom near */
@@ -31,4 +34,5 @@ public class MyPyramid extends MyPrimitive {
 	public void displayOnce(GL2 gl) {
         displayTriangles(gl, TA);
     }
+    
 }

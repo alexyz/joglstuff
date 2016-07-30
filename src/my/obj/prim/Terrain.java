@@ -6,13 +6,19 @@ import java.util.Arrays;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import javax.swing.*;
+import javax.xml.bind.annotation.*;
 
 import com.jogamp.common.nio.Buffers;
 
 /**
  * A terrain map generated from an image.
  */
+@XmlRootElement(name="terrain")
 public class Terrain extends MyPrimitive {
+	
+	public Terrain () {
+		//
+	}
 
 	@Override
 	public void displayOnce(GL2 gl) {

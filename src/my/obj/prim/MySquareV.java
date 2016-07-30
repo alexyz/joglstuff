@@ -2,6 +2,8 @@ package my.obj.prim;
 
 import java.nio.FloatBuffer;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 
@@ -9,9 +11,14 @@ import my.obj.MyObject;
 
 import com.jogamp.common.nio.Buffers;
 
+@XmlRootElement(name="mysquare")
 public class MySquareV extends MyObject {
     
-    int list;
+    private int list;
+    
+    public MySquareV () {
+    	//
+	}
     
     @Override
 	public void display(GL2 gl) {
@@ -56,4 +63,5 @@ public class MySquareV extends MyObject {
         gl.glCallList(list);
 
     }
+    
 }

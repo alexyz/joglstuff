@@ -1,8 +1,10 @@
 package my.obj.prim;
 
+import javax.xml.bind.annotation.*;
+
 import com.jogamp.opengl.GL2;
 
-
+@XmlRootElement(name="mycube")
 public class MyCube extends MyPrimitive {
     
     // vertices
