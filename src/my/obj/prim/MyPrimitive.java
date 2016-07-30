@@ -15,16 +15,6 @@ public abstract class MyPrimitive extends MyObject {
     
     protected static final Random rand = new Random();
     
-    // colour constants
-    protected static final float[] red = { 1, 0, 0 };
-    protected static final float[] green = { 0, 1, 0 };
-    protected static final float[] blue = { 0, 0, 1 };
-    protected static final float[] yellow = { 1, 1, 0 };
-    protected static final float[] darkblue = { 0, 0, 0.5f };
-    protected static final float[] darkgreen = { 0, 0.5f, 0 };
-    protected static final float[] darkred = { 0.5f, 0, 0 };
-    protected static final float[] lightgrey = { 2f/3, 2f/3, 2f/3 };
-    protected static final float[] darkgrey = { 1f/3, 1f/3, 1f/3 };
     /** half unity co-ordinate */
     protected static final float h = 0.5f;
     

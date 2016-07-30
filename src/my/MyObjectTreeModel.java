@@ -2,6 +2,7 @@ package my;
 
 import java.util.*;
 
+import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
@@ -40,6 +41,8 @@ public class MyObjectTreeModel implements TreeModel {
 	@Override
 	public void valueForPathChanged (TreePath path, Object newValue) {
 		System.out.println("valueForPathChanged " + path + " => " + newValue);
+		TreeModelEvent e = new TreeModelEvent(this, path);
+		listeners.stream().forEach(c -> c.treeStructureChanged(e));
 	}
 
 	@Override

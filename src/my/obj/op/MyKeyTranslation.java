@@ -30,19 +30,19 @@ public class MyKeyTranslation extends MyTranslation implements KeyListener {
 	public void keyTyped (KeyEvent e) {
 		char c = e.getKeyChar();
         if (c == key(xkeys, 0)) {
-        	xo -= 1;
+        	xo -= d;
         } else if (c == key(xkeys, 1)) {
-        	xo += 1;
+        	xo += d;
         }
         if (c == key(ykeys, 0)) {
-        	yo -= 1;
+        	yo -= d;
         } else if (c == key(ykeys, 1)) {
-        	yo += 1;
+        	yo += d;
         }
         if (c == key(zkeys, 0)) {
-        	zo -= 1;
+        	zo -= d;
         } else if (c == key(zkeys, 1)) {
-        	zo += 1;
+        	zo += d;
         }
         if (c == ' ') {
         	xo = 0;
