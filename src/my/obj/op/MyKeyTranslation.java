@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.*;
 
 import com.jogamp.opengl.awt.GLCanvas;
 
-import my.Main;
-
 @XmlRootElement(name="keytranslation")
 public class MyKeyTranslation extends MyTranslation implements KeyListener {
 	
@@ -20,9 +18,12 @@ public class MyKeyTranslation extends MyTranslation implements KeyListener {
 	@XmlAttribute
     public float d;
 	
+	private GLCanvas canvas;
+	
     @Override
-	public void addListeners(GLCanvas glc) {
-        glc.addKeyListener(this);
+	public void addListeners(GLCanvas canvas) {
+        this.canvas = canvas;
+		canvas.addKeyListener(this);
     }
     
 	@Override
@@ -48,7 +49,7 @@ public class MyKeyTranslation extends MyTranslation implements KeyListener {
         	yo = 0;
         	zo = 0;
         }
-        Main.display();
+        canvas.firePropertyChange("redisplay", 0, 1);
 	}
 
 	@Override

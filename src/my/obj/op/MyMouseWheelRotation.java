@@ -2,8 +2,6 @@ package my.obj.op;
 
 import com.jogamp.opengl.awt.GLCanvas;
 
-import my.Main;
-
 import java.awt.event.*;
 
 import javax.xml.bind.annotation.*;
@@ -11,9 +9,12 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name="mousewheelrotation")
 public class MyMouseWheelRotation extends MyRotation implements MouseWheelListener {
 	
-    @Override
-	public void addListeners(GLCanvas glc) {
-        glc.addMouseWheelListener(this);
+    private GLCanvas canvas;
+
+	@Override
+	public void addListeners(GLCanvas canvas) {
+        this.canvas = canvas;
+		canvas.addMouseWheelListener(this);
     }
 
 	@Override
@@ -22,7 +23,7 @@ public class MyMouseWheelRotation extends MyRotation implements MouseWheelListen
         if (t == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
             aoffset += (360f + (e.getUnitsToScroll() * 2f)) % 360f;
         }
-        Main.display();
+        canvas.firePropertyChange("redisplay", 0, 1);
 	}
 	
 }

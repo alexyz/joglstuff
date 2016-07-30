@@ -2,8 +2,6 @@ package my.obj.op;
 
 import com.jogamp.opengl.awt.GLCanvas;
 
-import my.Main;
-
 import java.awt.Dimension;
 import java.awt.event.*;
 
@@ -16,11 +14,14 @@ public class MyMouseDragRotation extends MyRotation implements MouseListener, Mo
 	public String axis;
 	
     private int prevMouseX, prevMouseY;
+
+	private GLCanvas canvas;
     
     @Override
-	public void addListeners(GLCanvas glc) {
-        glc.addMouseListener(this);
-        glc.addMouseMotionListener(this);
+	public void addListeners(GLCanvas canvas) {
+        this.canvas = canvas;
+		canvas.addMouseListener(this);
+        canvas.addMouseMotionListener(this);
     }
     
 	@Override
@@ -36,7 +37,7 @@ public class MyMouseDragRotation extends MyRotation implements MouseListener, Mo
         	case "x": aoffset += thetaX; break;
         	case "y": aoffset += thetaY; break;
         }
-        Main.display();
+        canvas.firePropertyChange("redisplay", 0, 1);
 	}
 
 	@Override

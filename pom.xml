@@ -36,7 +36,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>my.Main</mainClass>
+							<mainClass>my.MainJFrame</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

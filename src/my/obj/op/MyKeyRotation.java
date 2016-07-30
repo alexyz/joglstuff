@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.*;
 
 import com.jogamp.opengl.awt.GLCanvas;
 
-import my.Main;
-
 @XmlRootElement(name="keyrotation")
 public class MyKeyRotation extends MyRotation implements KeyListener {
 	
@@ -16,9 +14,12 @@ public class MyKeyRotation extends MyRotation implements KeyListener {
 	@XmlAttribute
     public float d;
 	
+	private GLCanvas canvas;
+	
     @Override
-	public void addListeners(GLCanvas glc) {
-        glc.addKeyListener(this);
+	public void addListeners(GLCanvas canvas) {
+        this.canvas = canvas;
+		canvas.addKeyListener(this);
     }
 
 	@Override
@@ -31,7 +32,7 @@ public class MyKeyRotation extends MyRotation implements KeyListener {
         } else if (c == ' ') {
             aoffset = 0;
         }
-        Main.display();
+        canvas.firePropertyChange("redisplay", 0, 1);
 	}
 
 	@Override

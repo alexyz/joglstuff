@@ -1,5 +1,8 @@
 package my;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GL2ES1;
@@ -14,17 +17,14 @@ import com.jogamp.opengl.glu.GLU;
 import my.obj.MyFactory;
 import my.obj.MyObjectList;
 
-/**
- * TODO
- * plane-plane intersection
- * plane-line intersection
- */
-public class MainRenderer implements GLEventListener {
+public class MainRenderer implements GLEventListener, PropertyChangeListener {
 
 	public static final float ms = 1000, us = 1000_000, ns = 1000_000_000;
     private static final GLU glu = new GLU();
     private final MyObjectList root;
     private long startTimeNano;
+    private boolean displayed;
+	private GLAutoDrawable drawable;
     
     public MainRenderer() {
         MyFactory f = new MyFactory();
@@ -45,12 +45,13 @@ public class MainRenderer implements GLEventListener {
         
     }
     
-    public void addListeners(GLCanvas glc) {
-    	root.addListeners(glc);
+    public void addListeners(GLCanvas canvas) {
+    	root.addListeners(canvas);
+    	canvas.addPropertyChangeListener(this);
     }
     
     @Override
-	public void display(GLAutoDrawable glad) {
+	public void display(GLAutoDrawable drawable) {
     	//System.out.println("renderer display");
     	long nt = System.nanoTime();
     	float t;
@@ -62,22 +63,26 @@ public class MainRenderer implements GLEventListener {
     	}
         root.update(t);
         
-        final GL2 gl = glad.getGL().getGL2();
+        final GL2 gl = drawable.getGL().getGL2();
         // clear buffers to preset values
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         gl.glClear(GL.GL_DEPTH_BUFFER_BIT);
         // replace the current matrix with the identity matrix
         gl.glLoadIdentity();
         root.display(gl);
+        
+        displayed = false;
     }
 
-    public void displayChanged(GLAutoDrawable gLDrawable, boolean modeChanged, boolean deviceChanged) {
+    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
         System.out.printf("displayChanged(gld,%s,%s)\n", modeChanged, deviceChanged);
     }
 
     @Override
-	public void init(GLAutoDrawable glad) {
-        GL2 gl = glad.getGL().getGL2();
+	public void init(GLAutoDrawable drawable) {
+        this.drawable = drawable;
+        
+		GL2 gl = drawable.getGL().getGL2();
         
         //gl.glPolygonMode(GL.GL_FRONT, GL.GL_LINE);
         //gl.glPolygonMode(GL.GL_BACK, GL.GL_LINE);
@@ -101,14 +106,13 @@ public class MainRenderer implements GLEventListener {
         gl.glEnableClientState(GLPointerFunc.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GLPointerFunc.GL_COLOR_ARRAY);
         
-        root.init(glad);
+        root.init(drawable);
     }
 
     @Override
-	public void reshape(GLAutoDrawable gLDrawable, int x, int y, int width, int height) {
+	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         System.out.printf("reshape(gld,%d,%d,%d,%d)\n", x, y, width, height);
-        final GL2 gl = gLDrawable.getGL().getGL2();
-        
+        final GL2 gl = drawable.getGL().getGL2();
         
         // specify which matrix is the current matrix
         // Applies subsequent matrix operations to the projection matrix stack
@@ -138,6 +142,18 @@ public class MainRenderer implements GLEventListener {
 	@Override
 	public void dispose(GLAutoDrawable glad) {
 		System.out.println("dispose");
+	}
+
+	@Override
+	public void propertyChange (PropertyChangeEvent e) {
+		if (e.getPropertyName().equals("redisplay")) {
+			if (!displayed) { 
+				drawable.display();
+				displayed = true;
+			}
+		} else {
+			System.out.println("pce " + e.getPropertyName());
+		}
 	}
 
 }
