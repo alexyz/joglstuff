@@ -1,5 +1,7 @@
 package my.obj;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.awt.GLCanvas;
@@ -27,4 +29,25 @@ public abstract class MyObject {
 		//
 	}
 	
+	public int getChildCount() {
+		return 0;
+	}
+	
+	public MyObject getChild(int i) {
+		throw new RuntimeException();
+	}
+	
+	public int indexOf(MyObject child) {
+		throw new RuntimeException();
+	}
+	
+	public boolean isLeaf() {
+		return true;
+	}
+	
+	@Override
+	public String toString () {
+		XmlRootElement e = getClass().getAnnotation(XmlRootElement.class);
+		return e != null && e.name() != null ? e.name() : getClass().getSimpleName();
+	}
 }

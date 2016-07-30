@@ -48,5 +48,29 @@ public class MyObjectList extends MyObject {
 			a.update(t);
 		}
 	}
+	
+	@Override
+	public int getChildCount () {
+		return list.size();
+	}
+	
+	@Override
+	public MyObject getChild (int i) {
+		return list.get(i);
+	}
+	
+	@Override
+	public boolean isLeaf () {
+		return false;
+	}
+	
+	@Override
+	public int indexOf (MyObject child) {
+		return list.indexOf(child);
+	}
 
+	@Override
+	public String toString () {
+		return super.toString() + "[" + list.size() + "]";
+	}
 }

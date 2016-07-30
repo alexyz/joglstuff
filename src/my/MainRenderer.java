@@ -14,35 +14,19 @@ import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import com.jogamp.opengl.fixedfunc.GLPointerFunc;
 import com.jogamp.opengl.glu.GLU;
 
-import my.obj.MyFactory;
-import my.obj.MyObjectList;
+import my.obj.MyObject;
 
 public class MainRenderer implements GLEventListener, PropertyChangeListener {
 
 	public static final float ms = 1000, us = 1000_000, ns = 1000_000_000;
     private static final GLU glu = new GLU();
-    private final MyObjectList root;
+    private final MyObject root;
     private long startTimeNano;
     private boolean displayed;
 	private GLAutoDrawable drawable;
     
-    public MainRenderer() {
-        MyFactory f = new MyFactory();
-        
-        //MyObjectList all = MyScene2.create(f);
-        MyObjectList all = MyScene1.scene1(f);
-        
-        // could use f.mouseTranslator("z=W")
-        
-        // add to root with camera rotate/translate
-        root = f.list(
-                f.trans(0,-1,-5),
-                f.keyTranslator(0.25f, null, "eq", "ws"), // need to call gluLookAt really
-                f.keyRotator(2, null, "da", null),
-                f.mouseRotator(),
-                //f.timeRotator(1, "y"),
-                all);
-        
+    public MainRenderer(MyObject root) {
+		this.root = root;
     }
     
     public void addListeners(GLCanvas canvas) {
