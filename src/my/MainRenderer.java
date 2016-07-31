@@ -68,9 +68,8 @@ public class MainRenderer implements GLEventListener, PropertyChangeListener {
         
 		GL2 gl = drawable.getGL().getGL2();
         
-        //gl.glPolygonMode(GL.GL_FRONT, GL.GL_LINE);
-        //gl.glPolygonMode(GL.GL_BACK, GL.GL_LINE);
-        //gl.glCullFace(GL.GL_BACK);
+		// these are fun
+		//gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_LINE);
         gl.glEnable(GL.GL_CULL_FACE);
         
         // select flat or smooth shading
@@ -82,11 +81,11 @@ public class MainRenderer implements GLEventListener, PropertyChangeListener {
         // do depth comparisons and update the depth buffer
         gl.glEnable(GL.GL_DEPTH_TEST);
         // specify the value used for depth buffer comparisons
-        gl.glDepthFunc(GL.GL_LEQUAL);
+//        gl.glDepthFunc(GL.GL_LEQUAL);
         // the quality of color, texture coordinate, and fog coordinate interpolation
         gl.glHint(GL2ES1.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
         
-        // experimental
+        // experimental (required for MySquareV)
         gl.glEnableClientState(GLPointerFunc.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GLPointerFunc.GL_COLOR_ARRAY);
         

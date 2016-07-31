@@ -36,12 +36,13 @@ public class SpCube extends MyObject {
 			P p7 = new P(1, 1, 1); // right top far
 
 			// can only change one direction at a time
-			Q q0 = new Q(p2, p3, p1, p0, redc); // left
-			Q q1 = new Q(p4, p5, p7, p6, darkredc); // right
-			Q q2 = new Q(p0, p1, p5, p4, greenc); // bottom
-			Q q3 = new Q(p6, p7, p3, p2, darkgreenc); // top
-			Q q4 = new Q(p4, p6, p2, p0, bluec); // near
-			Q q5 = new Q(p1, p3, p7, p5, darkbluec); // far
+			// order implies facing direction...
+			Q q0 = new Q(p0, p1, p3, p2, redc); // left
+			Q q1 = new Q(p6, p7, p5, p4, darkredc); // right
+			Q q2 = new Q(p4, p5, p1, p0, greenc); // bottom
+			Q q3 = new Q(p2, p3, p7, p6, darkgreenc); // top
+			Q q4 = new Q(p0, p2, p6, p4, bluec); // near
+			Q q5 = new Q(p5, p7, p3, p1, darkbluec); // far
 
 			Q[] qa = new Q[] { q0, q1, q2, q3, q4, q5 };
 
