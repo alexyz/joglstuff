@@ -50,7 +50,7 @@ public class MainJFrame extends JFrame {
 		//MyObject all = MyScene1.scene1(f);
 		MyObject all;
 		try (InputStream is = getClass().getResourceAsStream("/scene1.xml")) {
-			all = xmls.load(is);
+			all = XmlUtil.load(is);
 		}
 		// add to root with camera rotate/translate
 		MyObject root = f.list(
@@ -114,9 +114,29 @@ public class MainJFrame extends JFrame {
 		JPopupMenu menu = new JPopupMenu();
 		menu.add(item("Create", e -> create()));
 		menu.add(item("Remove", e -> remove()));
+		menu.add(item("Move up", e -> move(-1)));
+		menu.add(item("Move down", e -> move(1)));
 		return menu;
 	}
 	
+	private void move (int off) {
+		TreePath[] a = tree.getSelectionPaths();
+		if (a.length != 1) {
+			JOptionPane.showMessageDialog(this, "Can't move multiple objects");
+			return;
+		}
+		TreePath p = a[0];
+		Object[] nodes = p.getPath();
+		if (nodes.length <= 1) {
+			JOptionPane.showMessageDialog(this, "Can't move root object");
+		}
+		MyObject o1 = (MyObject) nodes[nodes.length-1];
+		MyObjectList o2 = (MyObjectList) nodes[nodes.length-2];
+		int i = o2.list.indexOf(o1);
+		Collections.swap(o2.list, i, i + off);
+		tree.getModel().valueForPathChanged(p.getParentPath(), null);
+	}
+
 	private void remove () {
 		TreePath[] a = tree.getSelectionPaths();
 		if (a.length == 0) {
@@ -125,10 +145,14 @@ public class MainJFrame extends JFrame {
 		if (JOptionPane.showConfirmDialog(this, "Really remove " + a.length + " objects?") == JOptionPane.YES_OPTION) {
 			for (TreePath p : a) {
 				Object[] nodes = p.getPath();
-				MyObject o1 = (MyObject) nodes[nodes.length-1];
-				MyObjectList o2 = (MyObjectList) nodes[nodes.length-2];
-				o2.list.remove(o1);
-				tree.getModel().valueForPathChanged(p.getParentPath(), null);
+				if (nodes.length > 1) {
+					MyObject o1 = (MyObject) nodes[nodes.length-1];
+					MyObjectList o2 = (MyObjectList) nodes[nodes.length-2];
+					o2.list.remove(o1);
+					tree.getModel().valueForPathChanged(p.getParentPath(), null);
+				} else {
+					JOptionPane.showMessageDialog(this, "Can't remove root object");
+				}
 			}
 		}
 	}

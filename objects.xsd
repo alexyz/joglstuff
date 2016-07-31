@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+	<xs:element name="comp" type="myObjectComp" />
+	<xs:element name="keyrotation" type="myKeyRotation" />
+	<xs:element name="keytranslation" type="myKeyTranslation" />
+	<xs:element name="list" type="myObjectList" />
+	<xs:element name="mousedragrotation" type="myMouseDragRotation" />
+	<xs:element name="mousewheelrotation" type="myMouseWheelRotation" />
+	<xs:element name="mycheckerboard" type="myCheckerBoard" />
+	<xs:element name="mycube" type="myCube" />
+	<xs:element name="mycubeqs" type="myCubeS" />
+	<xs:element name="mypyramid" type="myPyramid" />
+	<xs:element name="mysquare" type="mySquareV" />
+	<xs:element name="rotation" type="myRotation" />
+	<xs:element name="scale" type="myScale" />
+	<xs:element name="set" type="myObjectSet" />
+	<xs:element name="spcube" type="spCube" />
+	<xs:element name="splinebox" type="spLineBox" />
+	<xs:element name="terrain" type="terrain" />
+	<xs:element name="timerotation" type="myTimeRotation" />
+	<xs:element name="translation" type="myTranslation" />
+	<xs:element name="vector" type="myVector" />
+	<xs:complexType name="myObjectComp">
+		<xs:complexContent>
+			<xs:extension base="myObjectList">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myObjectList">
+		<xs:complexContent>
+			<xs:extension base="myObject">
+				<xs:sequence>
+					<xs:choice maxOccurs="unbounded" minOccurs="0">
+						<xs:element ref="comp" />
+						<xs:element ref="list" />
+						<xs:element ref="set" />
+						<xs:element ref="keyrotation" />
+						<xs:element ref="rotation" />
+						<xs:element ref="vector" />
+						<xs:element ref="keytranslation" />
+						<xs:element ref="translation" />
+						<xs:element ref="mousedragrotation" />
+						<xs:element ref="mousewheelrotation" />
+						<xs:element ref="scale" />
+						<xs:element ref="timerotation" />
+						<xs:element ref="mycheckerboard" />
+						<xs:element ref="mycube" />
+						<xs:element ref="mycubeqs" />
+						<xs:element ref="mypyramid" />
+						<xs:element ref="mysquare" />
+						<xs:element ref="terrain" />
+						<xs:element ref="splinebox" />
+						<xs:element ref="spcube" />
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="myObject">
+		<xs:sequence />
+	</xs:complexType>
+	<xs:complexType name="myObjectSet">
+		<xs:complexContent>
+			<xs:extension base="myObjectList">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myKeyRotation">
+		<xs:complexContent>
+			<xs:extension base="myRotation">
+				<xs:sequence />
+				<xs:attribute name="keys" type="xs:string" />
+				<xs:attribute name="d" type="xs:float" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myRotation">
+		<xs:complexContent>
+			<xs:extension base="myVector">
+				<xs:sequence />
+				<xs:attribute name="a" type="xs:float" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="myVector">
+		<xs:complexContent>
+			<xs:extension base="myObject">
+				<xs:sequence />
+				<xs:attribute name="x" type="xs:float" use="required" />
+				<xs:attribute name="y" type="xs:float" use="required" />
+				<xs:attribute name="z" type="xs:float" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myKeyTranslation">
+		<xs:complexContent>
+			<xs:extension base="myTranslation">
+				<xs:sequence />
+				<xs:attribute name="xkeys" type="xs:string" />
+				<xs:attribute name="ykeys" type="xs:string" />
+				<xs:attribute name="zkeys" type="xs:string" />
+				<xs:attribute name="d" type="xs:float" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myTranslation">
+		<xs:complexContent>
+			<xs:extension base="myVector">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myMouseDragRotation">
+		<xs:complexContent>
+			<xs:extension base="myRotation">
+				<xs:sequence />
+				<xs:attribute name="axis" type="xs:string" />
+				<xs:attribute name="f" type="xs:float" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myMouseWheelRotation">
+		<xs:complexContent>
+			<xs:extension base="myRotation">
+				<xs:sequence />
+				<xs:attribute name="f" type="xs:float" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myScale">
+		<xs:complexContent>
+			<xs:extension base="myVector">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myTimeRotation">
+		<xs:complexContent>
+			<xs:extension base="myRotation">
+				<xs:sequence />
+				<xs:attribute name="d" type="xs:float" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myCheckerBoard">
+		<xs:complexContent>
+			<xs:extension base="myPrimitive">
+				<xs:sequence />
+				<xs:attribute name="sx" type="xs:int" use="required" />
+				<xs:attribute name="sz" type="xs:int" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="myPrimitive">
+		<xs:complexContent>
+			<xs:extension base="myObject">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myCube">
+		<xs:complexContent>
+			<xs:extension base="myPrimitive">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myCubeS">
+		<xs:complexContent>
+			<xs:extension base="myCube">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="myPyramid">
+		<xs:complexContent>
+			<xs:extension base="myPrimitive">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="mySquareV">
+		<xs:complexContent>
+			<xs:extension base="myObject">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="terrain">
+		<xs:complexContent>
+			<xs:extension base="myPrimitive">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="spLineBox">
+		<xs:complexContent>
+			<xs:extension base="myObject">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="spCube">
+		<xs:complexContent>
+			<xs:extension base="myObject">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

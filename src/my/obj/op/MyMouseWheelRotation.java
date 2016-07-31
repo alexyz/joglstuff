@@ -9,6 +9,9 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name="mousewheelrotation")
 public class MyMouseWheelRotation extends MyRotation implements MouseWheelListener {
 	
+	@XmlAttribute
+	public float f;
+	
     private GLCanvas canvas;
 
 	@Override
@@ -21,7 +24,7 @@ public class MyMouseWheelRotation extends MyRotation implements MouseWheelListen
 	public void mouseWheelMoved (MouseWheelEvent e) {
 		int t = e.getScrollType();
         if (t == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
-            aoffset += (360f + (e.getUnitsToScroll() * 2f)) % 360f;
+            aoffset += (f * 360f + (e.getUnitsToScroll() * 2f)) % 360f;
         }
         canvas.firePropertyChange("redisplay", 0, 1);
 	}

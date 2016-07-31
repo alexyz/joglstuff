@@ -12,6 +12,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 import my.obj.MyObject;
 
@@ -35,7 +36,8 @@ public class AttrJPanel extends JPanel implements ChangeListener, ActionListener
 			try {
 				for (Field field : o.getClass().getFields()) {
 					int mod = field.getModifiers();
-					if (Modifier.isPublic(mod) && !Modifier.isStatic(mod)) {
+					XmlTransient t = field.getAnnotation(XmlTransient.class);
+					if (t == null && Modifier.isPublic(mod) && !Modifier.isStatic(mod)) {
 						if (field.getType().equals(float.class)) {
 							JSpinner spinner = new JSpinner(new SpinnerNumberModel(((Number)field.get(o)).doubleValue(), -1000, 1000, 0.25));
 							spinner.setName(field.getName());

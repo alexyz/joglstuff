@@ -13,7 +13,10 @@ public class MyMouseDragRotation extends MyRotation implements MouseListener, Mo
 	@XmlAttribute
 	public String axis;
 	
-    private int prevMouseX, prevMouseY;
+	@XmlAttribute
+	public float f = 1;
+	
+    private float prevMouseX, prevMouseY;
 
 	private GLCanvas canvas;
     
@@ -26,11 +29,11 @@ public class MyMouseDragRotation extends MyRotation implements MouseListener, Mo
     
 	@Override
 	public void mouseDragged (MouseEvent e) {
-		int xp = e.getX();
-        int yp = e.getY();
+		float xp = e.getX();
+        float yp = e.getY();
         Dimension size = e.getComponent().getSize();
-        float thetaY = 360.0f * ((float) (xp - prevMouseX) / (float) size.width);
-        float thetaX = 360.0f * ((float) (prevMouseY - yp) / (float) size.height);
+        float thetaY = f * 360.0f * ((xp - prevMouseX) / size.width);
+        float thetaX = f * 360.0f * ((prevMouseY - yp) / size.height);
         prevMouseX = xp;
         prevMouseY = yp;
         switch (String.valueOf(axis)) {
