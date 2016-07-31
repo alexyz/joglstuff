@@ -1,12 +1,14 @@
 package my.obj.sc;
 
+import javax.xml.bind.annotation.*;
+
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 
 import my.obj.MyObject;
 
-/** linebox from spinnycube */
-public class Linebox extends MyObject {
+@XmlRootElement(name="splinebox")
+public class SpLineBox extends MyObject {
 	
 	@Override
 	public void display (GL2 gl) {
@@ -20,10 +22,12 @@ public class Linebox extends MyObject {
 				gl.glVertex3f(-1, a, b);
 				gl.glColor3fv(darkred, 0);
 				gl.glVertex3f(1, a, b);
+				
 				gl.glColor3fv(green, 0);
 				gl.glVertex3f(a, -1, b);
 				gl.glColor3fv(darkgreen, 0);
 				gl.glVertex3f(a, 1, b);
+				
 				gl.glColor3fv(blue, 0);
 				gl.glVertex3f(a, b, -1);
 				gl.glColor3fv(darkblue, 0);

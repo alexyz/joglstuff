@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<set>
+    <list>
+        <mypyramid/>
+        <translation x="1.0" y="0.0" z="0.0"/>
+        <comp>
+            <mousedragrotation axis="x" a="0.0" x="1.0" y="0.0" z="0.0"/>
+            <mousedragrotation axis="y" a="0.0" x="0.0" y="1.0" z="0.0"/>
+            <mousewheelrotation a="0.0" x="0.0" y="0.0" z="1.0"/>
+        </comp>
+        <scale x="0.5" y="0.5" z="0.5"/>
+        <mypyramid/>
+    </list>
+    <list>
+        <translation x="-1.0" y="0.0" z="0.0"/>
+        <mycube/>
+    </list>
+    <list>
+        <translation x="0.0" y="0.25" z="1.0"/>
+        <scale x="0.5" y="0.5" z="0.5"/>
+        <mysquare/>
+    </list>
+    <list>
+        <translation x="0.0" y="1.0" z="0.0"/>
+        <timerotation d="15.0" a="0.0" x="0.0" y="1.0" z="0.0"/>
+        <list>
+            <scale x="0.5" y="0.5" z="0.5"/>
+            <mycube/>
+        </list>
+        <list>
+            <translation x="0.0" y="0.15" z="-1.0"/>
+            <timerotation d="30.0" a="0.0" x="0.0" y="0.0" z="1.0"/>
+            <scale x="0.2" y="0.2" z="0.2"/>
+            <mycube/>
+        </list>
+    </list>
+    <list>
+        <translation x="0.0" y="0.0" z="1.0"/>
+        <comp>
+            <keyrotation keys="zx" d="2.0" a="0.0" x="1.0" y="0.0" z="0.0"/>
+            <keyrotation keys="cv" d="2.0" a="0.0" x="0.0" y="1.0" z="0.0"/>
+            <keyrotation keys="bn" d="2.0" a="0.0" x="0.0" y="0.0" z="1.0"/>
+        </comp>
+        <scale x="2.0" y="2.0" z="2.0"/>
+        <mycheckerboard sx="6" sz="6"/>
+    </list>
+</set>

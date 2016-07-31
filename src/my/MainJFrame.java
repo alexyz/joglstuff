@@ -6,6 +6,7 @@ import my.obj.*;
 
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.io.InputStream;
 import java.util.*;
 
 import javax.swing.*;
@@ -28,21 +29,29 @@ public class MainJFrame extends JFrame {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		MainJFrame f = new MainJFrame();
 		f.setVisible(true);
+		Thread.sleep(300000);
+		System.exit(0);
 	}
 	
+	private final List<MyObject> selected = new ArrayList<>();
 	private final GLCanvas canvas = new GLCanvas();
 	private final AttrJPanel attr = new AttrJPanel();
 	private final JTree tree;
 	
-	public MainJFrame () {
+	public MainJFrame () throws Exception {
 		super("Main [https://github.com/alexyz/joglstuff]");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		canvas.setPreferredSize(new Dimension(640,480));
+		
 		MyFactory f = new MyFactory();
-		MyObject all = MyScene1.scene1(f);
+		//MyObject all = MyScene1.scene1(f);
+		MyObject all;
+		try (InputStream is = getClass().getResourceAsStream("/scene1.xml")) {
+			all = xmls.load(is);
+		}
 		// add to root with camera rotate/translate
 		MyObject root = f.list(
 				f.trans(0,-1,-5),
@@ -93,14 +102,35 @@ public class MainJFrame extends JFrame {
 		}
 	}
 	
+	private static JMenuItem item (String text, ActionListener l) {
+		JMenuItem item = new JMenuItem(text);
+		item.addActionListener(l);
+		return item;
+	}
+	
 	private JPopupMenu createTreePopupMenu () {
-		JMenuItem create = new JMenuItem("Create");
-		create.addActionListener(e -> create());
-		//create, move up, down, remove, wrap, merge?
+		//create, move up, down, remove, wrap, replace, merge?
 		// save, load
 		JPopupMenu menu = new JPopupMenu();
-		menu.add(create);
+		menu.add(item("Create", e -> create()));
+		menu.add(item("Remove", e -> remove()));
 		return menu;
+	}
+	
+	private void remove () {
+		TreePath[] a = tree.getSelectionPaths();
+		if (a.length == 0) {
+			return;
+		}
+		if (JOptionPane.showConfirmDialog(this, "Really remove " + a.length + " objects?") == JOptionPane.YES_OPTION) {
+			for (TreePath p : a) {
+				Object[] nodes = p.getPath();
+				MyObject o1 = (MyObject) nodes[nodes.length-1];
+				MyObjectList o2 = (MyObjectList) nodes[nodes.length-2];
+				o2.list.remove(o1);
+				tree.getModel().valueForPathChanged(p.getParentPath(), null);
+			}
+		}
 	}
 	
 	private void create() {
@@ -121,7 +151,11 @@ public class MainJFrame extends JFrame {
 	}
 	
 	private void create2 (Class<? extends MyObject> c) {
-		TreePath p = tree.getSelectionPath();
+		TreePath[] a = tree.getSelectionPaths();
+		if (a.length != 1) {
+			return;
+		}
+		TreePath p = a[0];
 		Object[] nodes = p.getPath();
 		MyObject o1 = (MyObject) nodes[nodes.length-1];
 		MyObject newo = rethrow(() -> c.newInstance());
@@ -130,15 +164,20 @@ public class MainJFrame extends JFrame {
 			tree.getModel().valueForPathChanged(p, null);
 		} else {
 			MyObjectList o2 = (MyObjectList) nodes[nodes.length-2];
-			o2.list.add(o2.indexOf(o1), newo);
+			o2.list.add(o2.indexOf(o1) + 1, newo);
 			tree.getModel().valueForPathChanged(p.getParentPath(), null);
 		}
 	}
 
 	private void select (TreeSelectionEvent e) {
+		selected.stream().forEach(o -> o.selected = false);
+		selected.clear();
 		Object o = e.getPath().getLastPathComponent();
 		if (o instanceof MyObject) {
-			attr.setObject((MyObject)o);
+			MyObject mo = (MyObject)o;
+			mo.selected = true;
+			selected.add(mo);
+			attr.setObject(mo);
 		} else {
 			attr.setObject(null);
 		}

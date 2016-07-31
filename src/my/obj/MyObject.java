@@ -1,8 +1,9 @@
 package my.obj;
 
+import java.awt.Color;
 import java.util.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
@@ -39,8 +40,11 @@ public abstract class MyObject {
 			MySquareV.class,
 			Terrain.class,
 			
-			Linebox.class
+			SpLineBox.class,
+			SpCube.class
 		);
+	
+	public static final float[] white = color(Color.white);
 	public static final float[] red = { 1, 0, 0 };
     public static final float[] green = { 0, 1, 0 };
     public static final float[] blue = { 0, 0, 1 };
@@ -54,6 +58,17 @@ public abstract class MyObject {
 	public static char key(String k, int n) {
     	return k != null && k.length() > n ? k.charAt(n) : 0;
     }
+	
+	public static float[] color(Color c) {
+		return new float[] { c.getRed() / 255f, c.getGreen() / 255f, c.getBlue() / 255f };
+	}
+	
+	@XmlTransient
+	public boolean selected;
+	
+	public MyObject () {
+		//
+	}
 
 	public abstract void display(GL2 gl);
 	

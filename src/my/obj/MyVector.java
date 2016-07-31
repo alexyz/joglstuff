@@ -1,7 +1,6 @@
 package my.obj;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * point with x, y, z position

@@ -26,12 +26,12 @@ public abstract class MyPrimitive extends MyObject {
     protected abstract void displayOnce(GL2 gl);
     
     @Override
-	public final void init(GLAutoDrawable glad) {
+	public final void init(GLAutoDrawable drawable) {
         // may already be compiled
         if (list != 0)
             return;
         
-        GL2 gl = glad.getGL().getGL2();
+        GL2 gl = drawable.getGL().getGL2();
         list = gl.glGenLists(1);
         gl.glNewList(list, GL2.GL_COMPILE);
         displayOnce(gl);
@@ -41,16 +41,40 @@ public abstract class MyPrimitive extends MyObject {
     
     @Override
 	public final void display(GL2 gl) {
-        // displayImpl(gl);
-        gl.glCallList(list);
+    	gl.glCallList(list);
+    	if (selected) {
+    		gl.glPushMatrix();
+    		gl.glBegin(GL.GL_LINES);
+    		gl.glLineWidth(2.0f);
+    		
+    		gl.glColor3fv(white, 0);
+			gl.glVertex3f(0, 0, -1);
+			gl.glColor3fv(white, 0);
+			gl.glVertex3f(0, 0, 1);
+			
+			gl.glColor3fv(white, 0);
+			gl.glVertex3f(0, -1, 0);
+			gl.glColor3fv(white, 0);
+			gl.glVertex3f(0, 1, 0);
+			
+			gl.glColor3fv(white, 0);
+			gl.glVertex3f(-1, 0, 0);
+			gl.glColor3fv(white, 0);
+			gl.glVertex3f(1, 0, 0);
+			
+			gl.glEnd();
+			gl.glPopMatrix();
+    	}
     }
     
     protected static final void displayTriangles(GL2 gl, float[][][] TL) {
         display(gl, GL.GL_TRIANGLES, TL);
     }
+    
     protected static final void displayQuads(GL2 gl, float[][][] QL) {
         display(gl, GL2.GL_QUADS, QL);
     }
+    
     protected static final void displayQuadStrip(GL2 gl, float[][][] QL) {
         display(gl, GL2.GL_QUAD_STRIP, QL);
     }
@@ -60,7 +84,6 @@ public abstract class MyPrimitive extends MyObject {
      */
     private static void display(GL2 gl, int type, float[][][] polys) {
         int colourIndex = polys[0].length - 1;
-        
         gl.glBegin(type);
         for (int n = 0; n < polys.length; n++) {
             float[][] p = polys[n];

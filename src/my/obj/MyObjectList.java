@@ -14,7 +14,7 @@ import com.jogamp.opengl.awt.GLCanvas;
 @XmlRootElement(name="list")
 public class MyObjectList extends MyObject {
 	
-	@XmlMixed
+	@XmlElementRef
 	public final List<MyObject> list = new ArrayList<>();
 
 	@Override
