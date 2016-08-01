@@ -8,6 +8,12 @@ import my.obj.*;
 
 @XmlRootElement(name="scale")
 public class MyScale extends MyVector {
+	
+	public MyScale () {
+		x = 1;
+		y = 1;
+		z = 1;
+	}
 
 	@Override
 	public void display(GL2 gl) {

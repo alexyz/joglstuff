@@ -62,6 +62,20 @@ public abstract class MyPrimitive extends MyObject {
 			gl.glColor3fv(white, 0);
 			gl.glVertex3f(1, 0, 0);
 			
+			//
+			
+//			for (int x = -1; x <= 1; x+=2) {
+//				for (int y = -1; y <= 1; y+=2) {
+//					for (int z = -1; z <= 1; z+=2) {
+//						gl.glColor3fv(white, 0);
+//						gl.glVertex3f(x,y,z);
+//						gl.glColor3fv(white, 0);
+//						gl.glVertex3f(-x,-y,-z);
+//					}
+//				}
+//			}
+			
+			
 			gl.glEnd();
 			gl.glPopMatrix();
     	}

@@ -19,4 +19,8 @@ public class MyRotation extends MyVector {
         gl.glRotatef(a + aoffset, x, y, z);
     }
     
+    @Override
+	public String toString () {
+		return super.toString() + " " + a; 
+	}
 }

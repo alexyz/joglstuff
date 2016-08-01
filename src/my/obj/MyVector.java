@@ -18,4 +18,8 @@ public abstract class MyVector extends MyObject {
 	@XmlAttribute
 	public float z;
 	
+	@Override
+	public String toString () {
+		return super.toString() + " " + x + " " + y + " " + z; 
+	}
 }

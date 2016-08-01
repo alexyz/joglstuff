@@ -36,8 +36,10 @@ public class AttrJPanel extends JPanel implements ChangeListener, ActionListener
 			try {
 				for (Field field : o.getClass().getFields()) {
 					int mod = field.getModifiers();
-					XmlTransient t = field.getAnnotation(XmlTransient.class);
-					if (t == null && Modifier.isPublic(mod) && !Modifier.isStatic(mod)) {
+					boolean t = Modifier.isTransient(mod);
+					boolean p = Modifier.isPublic(mod);
+					boolean s = Modifier.isStatic(mod);
+					if (p && !s && !t) {
 						if (field.getType().equals(float.class)) {
 							JSpinner spinner = new JSpinner(new SpinnerNumberModel(((Number)field.get(o)).doubleValue(), -1000, 1000, 0.25));
 							spinner.setName(field.getName());

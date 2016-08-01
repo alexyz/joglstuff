@@ -41,4 +41,8 @@ public class MyCheckerBoard extends MyPrimitive {
         displayQuads(gl, q);
     }
 	
+	@Override
+	public String toString () {
+		return super.toString() + " " + sx + " " + sz; 
+	}
 }

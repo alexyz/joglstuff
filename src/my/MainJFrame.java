@@ -109,7 +109,7 @@ public class MainJFrame extends JFrame {
 	}
 	
 	private JPopupMenu createTreePopupMenu () {
-		//create, move up, down, remove, wrap, replace, merge?
+		// wrap, replace, merge?
 		// save, load
 		JPopupMenu menu = new JPopupMenu();
 		menu.add(item("Create", e -> create()));

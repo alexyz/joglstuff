@@ -41,7 +41,8 @@ public abstract class MyObject {
 			Terrain.class,
 			
 			SpLineBox.class,
-			SpCube.class
+			SpCube.class,
+			SpTet.class
 		);
 	
 	public static final float[] white = color(Color.white);
@@ -63,8 +64,7 @@ public abstract class MyObject {
 		return new float[] { c.getRed() / 255f, c.getGreen() / 255f, c.getBlue() / 255f };
 	}
 	
-	@XmlTransient
-	public boolean selected;
+	public transient boolean selected;
 	
 	public MyObject () {
 		//
