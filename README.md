@@ -9,9 +9,9 @@ JOGL is currently available from http://jogamp.org/
 Screenshots
 -----------
 
-![Screenshot](https://dl.dropboxusercontent.com/u/8069847/jogl.png)
+![Screenshot](jogl.png)
 
 Download
 --------
 
-[Runnable jar file](https://dl.dropboxusercontent.com/u/8069847/joglstuff.jar)
+[Runnable jar file](https://www.dropbox.com/s/22wi6d199ytwst7/joglstuff.jar?dl=0)
